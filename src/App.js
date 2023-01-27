@@ -1,6 +1,9 @@
+import React from "react";
 import Expenses from "./components/Expenses/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
+import ExpenseFilter from "./components/Expenses/ExpensesFilter"
 function App() {
-  const expenses = [
+  const defaultData = [
     {
       id: "e1",
       title: "Toilet Paper",
@@ -22,13 +25,21 @@ function App() {
     },
   ];
 
- 
+  const [expenses, setExpenses] = React.useState(defaultData)
+
+ const onSubmitExpenseDataHandler = (data) => {
+  setExpenses((prevState) => {
+    return [data, ...prevState]
+  })
+ }
 
 
 
   return (
     <div className="App">
       <h2>Let's get started!</h2>
+      <ExpenseFilter/>
+      <NewExpense onSubmitExpenseData={onSubmitExpenseDataHandler}/>
        <Expenses expenses={expenses}></Expenses>
     </div>
   );
