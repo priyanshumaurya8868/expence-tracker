@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment/moment";
 import "./ExpenseForm.css";
 function ExpenseForm(props) {
-  const [state, setState] = React.useState({ title: "", amount: 0, date: "" });
+  const [state, setState] = React.useState({ title: "", amount: "", date: "" });
 
   const titleChangeHandler = (event) => {
     setState((prevState) => {
@@ -17,7 +17,7 @@ function ExpenseForm(props) {
     setState((prevState) => {
       return {
         ...prevState,
-        amount: event.target.value,
+        amount: +event.target.value,
       };
     });
   };
@@ -70,6 +70,9 @@ function ExpenseForm(props) {
           />
         </div>
         <div className="new-expense__actions">
+          <button type="button" onClick={props.onCancel}>
+            Cancel
+          </button>
           <button type="submit">Add Expense</button>
         </div>
       </div>
